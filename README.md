@@ -1,4 +1,4 @@
-# RdpMouseBridge
+# RdpMouseBridge (v0.0.0.1)
 
 用 Windows 自带 MSTSC 远程玩 3D 游戏时，RDP 只把光标的**绝对位置**送进远程会话，而大多数游戏的视角旋转只读 **Raw Input 的相对位移 ΔX/ΔY**，于是相机不动。
 

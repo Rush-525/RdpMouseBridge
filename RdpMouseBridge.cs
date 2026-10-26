@@ -10,6 +10,15 @@ using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using System.Reflection;
+
+[assembly: AssemblyTitle("RdpMouseBridge")]
+[assembly: AssemblyDescription("RDP Relative Mouse Bridge for 3D Gaming")]
+[assembly: AssemblyProduct("RdpMouseBridge")]
+[assembly: AssemblyCopyright("Copyright © 2026")]
+[assembly: AssemblyVersion("0.0.0.1")]
+[assembly: AssemblyFileVersion("0.0.0.1")]
+[assembly: AssemblyInformationalVersion("0.0.0.1")]
 
 namespace RdpMouseBridge
 {
@@ -108,7 +117,14 @@ namespace RdpMouseBridge
 
         private void BuildUi()
         {
-            Text = "RdpMouseBridge - RDP 相对鼠标桥";
+            Text = "RdpMouseBridge v0.0.0.1 - RDP 相对鼠标桥";
+            try
+            {
+                Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            }
+            catch
+            {
+            }
             Font = new Font("Microsoft YaHei UI", 9F);
             ClientSize = new Size(680, 610);
             FormBorderStyle = FormBorderStyle.FixedSingle;

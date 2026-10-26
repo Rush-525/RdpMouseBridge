@@ -8,10 +8,26 @@ if (-not (Test-Path $csc)) {
 Push-Location $PSScriptRoot
 try {
     $outTmp = "RdpMouseBridge.tmp.$([Guid]::NewGuid().ToString('N').Substring(0,8)).exe"
-    & $csc /nologo /target:winexe /platform:anycpu /optimize+ /debug- /codepage:65001 `
-        /out:$outTmp `
-        /r:System.dll /r:System.Core.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll `
-        RdpMouseBridge.cs
+    $cscArgs = @(
+        '/nologo',
+        '/target:winexe',
+        '/platform:anycpu',
+        '/optimize+',
+        '/debug-',
+        '/codepage:65001'
+    )
+    if (Test-Path "app.ico") {
+        $cscArgs += "/win32icon:app.ico"
+    }
+    $cscArgs += "/out:$outTmp"
+    $cscArgs += '/r:System.dll'
+    $cscArgs += '/r:System.Core.dll'
+    $cscArgs += '/r:System.Windows.Forms.dll'
+    $cscArgs += '/r:System.Drawing.dll'
+    $cscArgs += '/r:System.Web.Extensions.dll'
+    $cscArgs += 'RdpMouseBridge.cs'
+
+    & $csc $cscArgs
 
     if ($LASTEXITCODE -ne 0) {
         throw "Compilation failed with exit code $LASTEXITCODE."
